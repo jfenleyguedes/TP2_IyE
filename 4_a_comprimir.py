@@ -7,11 +7,13 @@ from funciones_auxiliares_tp2 import huffman_code
 
 def comprimir(ruta_entrada, ruta_salida=None):
     if ruta_salida is None:
+        #Crea la ruta quedandose con la primera parte del split y agregandole la extensión tp2
         ruta_salida = ruta_entrada.rsplit(".", 1)[0] + ".tp2"
 
     img = Image.open(ruta_entrada).convert("L") #Abrir la imagen en escala de grises
     X = np.array(img, dtype=int)
     filas, columnas = X.shape
+    #Separa la primera columna y calcula los residuos
     primera_columna = X[:, 0].tolist()
     residuos = (X[:, 1:] - X[:, :-1]).flatten().tolist()
 
@@ -41,7 +43,10 @@ def comprimir(ruta_entrada, ruta_salida=None):
 
 
 if __name__ == "__main__":
+    #Igual que para descomprimir: se fija si le pasaron más de dos argumentos por la terminal
     if len(sys.argv) < 2:
+        #Si no, muestra como deberia usarse y termina la ejecución indicando un error
         print("Uso: python comprimir_tp2.py <imagen.jpg|png> [salida.tp2]")
         sys.exit(1)
+    #Si era mayor igual a 2 entonces llama a la función
     comprimir(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)

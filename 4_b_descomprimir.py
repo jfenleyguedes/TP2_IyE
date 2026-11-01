@@ -40,7 +40,10 @@ def descomprimir(ruta_entrada, ruta_salida_png=None):
 
 
 if __name__ == "__main__":
+    #Si se pasan menos de 2 parámetros por la terminal (sys.argv es una lista con los armugentos pasados por terminal) muestra como se deberia utilizar el programa y termina
     if len(sys.argv) < 2:
         print("Uso: python descomprimir_tp2.py <archivo.tp2> [salida.png]")
+        #El programa termina: el 1 es para indicar qe terminó con un error
         sys.exit(1)
+    #Si se le pasó correctamente llama a la función y le pasa los parámetros correspondientes.
     descomprimir(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
